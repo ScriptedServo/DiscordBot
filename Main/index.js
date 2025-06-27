@@ -5,6 +5,13 @@ const app = express();
 
 app.get('/', (req, res) => res.send('Bot is alive!'));
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Express server running on port ${PORT}`);
+});
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 const client = new Client({
   intents: [
@@ -227,4 +234,3 @@ client.on('messageCreate', message => {
 client.login(process.env.DISCORD_TOKEN).catch(err => {
   console.error('❌ Discord login failed:', err);
 });
-
